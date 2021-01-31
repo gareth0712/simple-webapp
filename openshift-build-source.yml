@@ -1,0 +1,34 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: my-webapp-python
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'my-webapp-python:latest'
+  runPolicy: Serial
+  source:
+    git:
+      ref: main
+      uri: 'https://github.com/gareth0712/simple-webapp.git'
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: 'python:3.6'
+        namespace: openshift
+    type: Source
+  triggers:
+    - imageChange:
+        lastTriggeredImageID: >-
+          172.30.1.1:5000/openshift/python@sha256:ac50754646f0d37616515fb30467d8743fb12954260ec36c9ecb5a94499447e0
+      type: ImageChange
+    - type: ConfigChange
+    - generic:
+        secret: 38cf36353c89d76f
+      type: Generic
+    - github:
+        secret: b56446ad307c2ea1
+      type: GitHub

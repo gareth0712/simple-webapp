@@ -1,0 +1,6 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  creationTimestamp: '2021-01-31T12:36:15Z'
+  generation: 1
+  name: my-webapp-python-docker
