@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y python python-pip
 
-COPY requirements.txt /op/
+COPY requirements.txt /opt/
 RUN pip install -r /opt/requirements.txt
 
 COPY app.py /opt/
